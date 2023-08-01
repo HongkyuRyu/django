@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     #third-party
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_yasg',
     
 ]
@@ -116,13 +117,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
-
-
-
-
-
-
+# JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 액세스 토큰 유효 기간 (예: 60분)
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),  # 리프레시 토큰 유효 기간 (예: 1일)
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),  # 슬라이딩 액세스 토큰 유효 기간 (예: 30일)
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': timedelta(days=30),  # 리프레시 토큰 유효 기간 확장 (예: 30일)
+    'ALGORITHM': 'HS256',  # 토큰 암호화 알고리즘 (예: HS256)
+}
 
 
 # Internationalization
